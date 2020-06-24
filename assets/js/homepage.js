@@ -4,23 +4,23 @@ var repoContainerEl = document.querySelector("#repos-container");
 var repoSearchTerm = document.querySelector("#repo-search-term");
 
 var formSubmitHandler = function(event) {
-// get value from input element
-var username = nameInputEl.value.trim();
+	// get value from input element
+	var username = nameInputEl.value.trim();
 
-if(username){
-    getUserRepos(username);
-    nameInputEl.value = "";
-} else {
-    alert("Please enter a GitHub username");
-}
+	if(username){
+		getUserRepos(username);
+		nameInputEl.value = "";
+	} else {
+		alert("Please enter a GitHub username");
+	}
 
-    event.preventDefault();
-    console.log(event);
+		event.preventDefault();
+		console.log(event);
 };
 
 var getUserRepos = function(user) {
 	// format the github api url
-	var apiUrl = `https://api.github.com/users/${user}/repos`;
+	var apiUrl = "https://api.github.com/users/${user}/repos";
 	fetch(apiUrl)
 		.then(function(response) {
 			if (response.ok) {
@@ -56,7 +56,7 @@ var displayRepos = function(repos, searchTerm) {
 		var repoEl = document.createElement("a");
 		repoEl.classList = "list-item flex-row justify-space-between align-center";
 		// dynamically redirect to user clicked repo
-		repoEl.setAttribute("href", `./single-repo.html?repo=${repoName}`);
+		repoEl.setAttribute("href", "./single-repo.html?repo=${repoName}");
 
 		// create a span element to hold repository name
 		var titleEl = document.createElement("span");
@@ -71,11 +71,14 @@ var displayRepos = function(repos, searchTerm) {
 
 		// check if current repo has issues or not
 		if (repos[i].open_issues_count > 0) {
-			statusEl.innerHTML = `<i class="fas fa-times status-icon icon-danger"></i>${repos[
+			//  statusEl.innerHTML =
+			//   "<i class='fas fa-times status-icon icon-danger'></i>" + repos[i].open_issues_count + " issue(s)";
+			statusEl.innerHTML = `<i class='fas fa-times status-icon icon-danger'></i>${repos[
 				i
 			].open_issues_count} issue(s)`;
 		} else {
-            statusEl.innerHTML = "<i class='fas fa-check-square status-icon icon-success'></i>";
+			statusEl.innerHTML =
+				"<i class='fas fa-check-square status-icon icon-success'></i>";
 		}
 
 		// append to container
