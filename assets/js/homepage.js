@@ -20,7 +20,7 @@ var formSubmitHandler = function(event) {
 
 var getUserRepos = function(user) {
 	// format the github api url
-	var apiUrl = "https://api.github.com/users/${user}/repos";
+	var apiUrl = "https://api.github.com/users/" + user + "/repos";
 	fetch(apiUrl)
 		.then(function(response) {
 			if (response.ok) {
@@ -56,7 +56,7 @@ var displayRepos = function(repos, searchTerm) {
 		var repoEl = document.createElement("a");
 		repoEl.classList = "list-item flex-row justify-space-between align-center";
 		// dynamically redirect to user clicked repo
-		repoEl.setAttribute("href", "./single-repo.html?repo=${repoName}");
+		repoEl.setAttribute("href", "./single-repo.html?repo=" + repoName);
 
 		// create a span element to hold repository name
 		var titleEl = document.createElement("span");
@@ -88,5 +88,4 @@ var displayRepos = function(repos, searchTerm) {
 		repoContainerEl.appendChild(repoEl);
 	}
 };
-console.log("outside");
 userFormEl.addEventListener("submit", formSubmitHandler);
